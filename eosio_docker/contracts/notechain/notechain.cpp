@@ -3,7 +3,54 @@
 using namespace eosio;
 using namespace std;
 
-class privatesharing : public eosio::contract {
+class notechain : public eosio::contract {
+public:
+  using contract::contract;
+  string name;
+
+  /// @abi action
+  bool signalsharing( account_name _requestee, uint64_t _price ) {
+    require_auth( _requestee );
+
+    // Check whether the user has already signalled that they are willing to share data
+    for(auto& item: _datasharing) {
+      if(_datasharing.requestee == _requestee) {
+        return false;
+      }
+    }
+
+    else {
+
+      _datasharing.emplace(get_self(), [&](auto& p) {
+        p.requestee = _requestee;
+        p.price = _price;
+      });
+
+      return true;
+    }
+  }
+
+  /// @abi action
+  void stopsharing( account_name _requestee ) {
+    require_auth( user );
+
+
+  }
+
+  /// @abi action
+  void acknowledgerequest( account_name user, account_name requestor ) {
+    require_auth( user );
+
+    // removes the requestor from the dataSharing structure so the front end does not repeat polling
+  }
+
+  /// @abi action
+  bool requestdata( account_name from, account_name source, string url ) {
+     // if source is
+
+    return true;
+  }
+
 private:
   struct datasharing {
     account_name  requestee;        // the EOS account that has shown willingness to share data
@@ -27,51 +74,10 @@ private:
 
   // local instances of the multi indexes
   datasharing _datasharing;
-  requestors _requestors;
-
-public:
-  using contract::contract;
-
-  /// @abi action
-  bool signalSharing( account_name _requestee, uint64_t _price ) {
-    require_auth( user );
-
-    // Check whether the user has already signalled that they are willing to share data
-    for(auto& item: _datasharing) {
-      if(_datasharing.requestee == _requestee) {
-        return false;
-      }
-    }
-
-    return true;
-
-
-    // If the user has not already signalled they are willing to share data, add to table
-
-    // _datasharing.emplace(get_self(), [&](auto& p) {
-    //   p.key = _polls.available_primary_key();
-    //   p.pollId = _polls.available_primary_key();
-    //   p.pollName = pollName;
-    //   p.pollStatus = 0;
-    //   p.option = "";
-    //   p.count = 0;
-    // });
-  }
-
-  void acknowledgeRequest( account_name user, account_name requestor ) {
-    require_auth( user );
-
-    // removes the requestor from the dataSharing structure so the front end does not repeat polling
-  }
-
-  bool requestData( account_name from, account_name source, string url ) {
-     // if source is
-
-    return true;
-  }
+  request _requestors;
 
 
 
 };
 
-EOSIO_ABI( privatesharing, (update) )
+EOSIO_ABI( notechain, (update)(signalsharing)(stopsharing)(acknowledgerequest)(requestdata) )

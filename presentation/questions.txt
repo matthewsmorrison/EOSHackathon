@@ -1,3 +1,0 @@
-- Mapping of EOS to entity
-- Spamming with the private keys
-- Why blockchain? Tracking access, taking payments for data etc.
