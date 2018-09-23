@@ -74,7 +74,7 @@ export class Grant extends React.Component {
                     <td style={{textAlign:"center"}}>Requestor</td>
                     <td style={{textAlign:"center"}}>Submit Data</td>
                     <td style={{textAlign:"center"}}>Mark As Sent</td>
-                    <td style={{textAlign:"center"}}>Completed?</td>
+                    <td style={{textAlign:"center"}}>Data Sent?</td>
                   </tr>
 
                 </thead>
@@ -86,7 +86,7 @@ export class Grant extends React.Component {
                             <td style={{textAlign:"center"}}>{item.id}</td>
                             <td style={{textAlign:"center"}}>UK Medical Data</td>
                             <td style={{textAlign:"center"}}>{item.requestor}</td>
-                            <td style={{textAlign:"center"}}><a href={item.url} className="button small">Submit</a></td>
+                            <td style={{textAlign:"center"}}><a href={item.url} target="_blank" className="button small">Submit</a></td>
                             <td style={{textAlign:"center"}}><a onClick={() => this.markAsSent(item.id)} className="button small">Mark As Sent</a></td>
                             {item.status === 0 && <td style={{textAlign:"center"}}><i style={{marginBottom: "0px", verticalAlign: "middle"}} className="fas fa-exclamation fa-1x"></i></td>}
                             {item.status === 1 && <td style={{textAlign:"center"}}><i style={{marginBottom: "0px", verticalAlign: "middle"}} className="fas fa-check fa-1x"></i></td>}

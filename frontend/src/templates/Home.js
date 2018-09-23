@@ -7,7 +7,7 @@ export const Home = () => (
             <div className="inner">
                 <div className="logo"><span className="icon fa-diamond"></span></div>
                 <h2>SecuriShare</h2>
-                <p>Decentralised Private File Sharing</p>
+                <p>Peer-to-Peer Private File Sharing, Enabled by EOS</p>
             </div>
         </section>
 
@@ -55,7 +55,7 @@ export const Home = () => (
                     <section className="features">
                         <article>
                             <h3 className="major">Matthew Morrison</h3>
-                            <p>Responsible for smart contract and front-end development.
+                            <p>MSc Computer Science, Imperial College London. <br/><br/>Responsible for smart contract and front-end development.
                                 <span> </span>
                                 <a href="https://github.com/matthewsmorrison">GitHub</a>
                             </p>
@@ -63,7 +63,7 @@ export const Home = () => (
 
                         <article>
                             <h3 className="major">Bastien Moyroud</h3>
-                            <p>Responsible for front-end and server-side development.
+                            <p>MSc Computer Science, Imperial College London. <br/><br/> Responsible for front-end and server-side development.
                                 <span> </span>
                                 <a href="https://github.com/bmoyroud">GitHub</a>
                             </p>
@@ -71,7 +71,7 @@ export const Home = () => (
 
                         <article>
                             <h3 className="major">Mohammed Hussan</h3>
-                            <p>Responsible for smart contract and front-end development.
+                            <p>MSc Computer Science, Imperial College London. <br/><br/>Responsible for smart contract and front-end development.
                                 <span> </span>
                                 <a href="https://github.com/Mo-Hussain">GitHub</a>
                             </p>
