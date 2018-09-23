@@ -7,24 +7,28 @@ export class Share extends React.Component {
     this.state = {
       noteTable: [], // to store the table rows from smart contract
       submitted: 0,
+      loggedInAddress: "accounta",
+      loggedInPrivateKey: "5JJDpNLf3e2fGtMzRfhifMkpz5LD3rtXXzLtAtvGT4gE4wEWfZA",
+      grantedAccess: false,
+      price: null,
     };
     this.signalAccess = this.signalAccess.bind(this);
   }
 
   signalAccess() {
-    const eos = Eos({keyProvider: "5K5P6dcWUFYrHRH8SuTKWHBva2zzjnB6weE41q1Bg7SBHiAUjsr"});
+    const eos = Eos({keyProvider: this.state.loggedInPrivateKey});
 
     var actionData = {
-      _requestee: "accountb",
-      _price: 0,
+      _requestee: this.state.loggedInAddress,
+      _price: this.state.price,
     };
 
     eos.transaction({
       actions: [{
-          account: "accounta",
+          account: "contract1",
           name: "sigshare",
           authorization: [{
-            actor: "accountb",
+            actor: this.state.loggedInAddress,
             permission: 'active',
           }],
           data: actionData,
@@ -32,6 +36,23 @@ export class Share extends React.Component {
       });
   }
 
+  updateState(evt) {
+  let target = evt.target;
+  let id = target.id;
+  let newState = this.state;
+
+  switch (id) {
+    case 'price':
+      newState.price = target.value;
+      break;
+
+    default:
+      console.log("Not updating any state.");
+    }
+
+  this.setState(newState);
+
+  }
 
   getTable() {
     const eos = Eos();
@@ -44,18 +65,14 @@ export class Share extends React.Component {
     }).then(result => this.setState({ noteTable: result.rows }));
   }
 
-  checkSubmitted() {
-
-  }
-
   componentDidMount() {
     this.getTable();
-    this.checkSubmitted();
   }
 
   render() {
     return (
         <section id="wrapper" >
+        <p style={{paddingLeft: "10px", paddingTop: "10px"}}>Connected to the EOS Blockchain as "{this.state.loggedInAddress}"</p>
             <header>
                 <div className="inner">
                     <h2>Share Your Data</h2>
@@ -73,16 +90,62 @@ export class Share extends React.Component {
                           <tr>
                             <td>Data Type</td>
                             <td>Data Description</td>
+                            <td style={{textAlign:"center", width:"100px"}}>Price (EOS)</td>
                             <td style={{textAlign:"center"}}>Signal Access</td>
+                            <td style={{textAlign:"center"}}>Granted Access?</td>
                           </tr>
 
                         </thead>
                         <tbody>
                         <tr>
                           <td>UK Medical Data</td>
-                          <td>Medical records PDF containing all key UK information</td>
+                          <td>PDF of UK medical records</td>
+                          <input type="number" id="price" min="0" onChange={evt => this.updateState(evt)}></input>
                           <td style={{textAlign:"center"}}><a onClick={this.signalAccess} className="button small">Signal Access</a></td>
+                          {this.state.grantedAccess && <td style={{textAlign:"center"}}><i style={{marginBottom: "0px", verticalAlign: "middle"}} className="fas fa-check fa-1x"></i></td>}
+                          {!this.state.grantedAccess && <td style={{textAlign:"center"}}><i style={{marginBottom: "0px", verticalAlign: "middle"}} className="fas fa-times fa-1x"></i></td>}
                         </tr>
+
+                        <tr>
+                          <td>Bank Statement</td>
+                          <td>A recent bank account statement</td>
+                          <input type="number" id="price" min="0" onChange={evt => this.updateState(evt)}></input>
+                          <td style={{textAlign:"center"}}><a className="button small">Signal Access</a></td>
+                          <td style={{textAlign:"center"}}><i style={{marginBottom: "0px", verticalAlign: "middle"}} className="fas fa-times fa-1x"></i></td>
+                        </tr>
+
+                        <tr>
+                          <td>Driving License</td>
+                          <td>A scanned copy of a driving license</td>
+                          <input type="number" id="price" min="0" onChange={evt => this.updateState(evt)}></input>
+                          <td style={{textAlign:"center"}}><a className="button small">Signal Access</a></td>
+                          <td style={{textAlign:"center"}}><i style={{marginBottom: "0px", verticalAlign: "middle"}} className="fas fa-times fa-1x"></i></td>
+                        </tr>
+
+                        <tr>
+                          <td>UK Passport</td>
+                          <td>A scanned copy of a UK passport</td>
+                          <input type="number" id="price" min="0" onChange={evt => this.updateState(evt)}></input>
+                          <td style={{textAlign:"center"}}><a className="button small">Signal Access</a></td>
+                          <td style={{textAlign:"center"}}><i style={{marginBottom: "0px", verticalAlign: "middle"}} className="fas fa-times fa-1x"></i></td>
+                        </tr>
+
+                        <tr>
+                          <td>Facebook Data</td>
+                          <td>A download of all data from Facebook</td>
+                          <input type="number" id="price" min="0" onChange={evt => this.updateState(evt)}></input>
+                          <td style={{textAlign:"center"}}><a className="button small">Signal Access</a></td>
+                          <td style={{textAlign:"center"}}><i style={{marginBottom: "0px", verticalAlign: "middle"}} className="fas fa-times fa-1x"></i></td>
+                        </tr>
+
+                        <tr>
+                          <td>Google History</td>
+                          <td>A download of all search engine searches</td>
+                          <input type="number" id="price" min="0" onChange={evt => this.updateState(evt)}></input>
+                          <td style={{textAlign:"center", verticalAlign:"center"}}><a className="button small">Signal Access</a></td>
+                          <td style={{textAlign:"center"}}><i style={{marginBottom: "0px", verticalAlign: "middle"}} className="fas fa-times fa-1x"></i></td>
+                        </tr>
+
                         </tbody>
 
                       </table>

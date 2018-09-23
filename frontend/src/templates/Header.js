@@ -23,11 +23,16 @@ export const Header = () => (
                         <Link to="/">Home</Link>
                     </li>
                     <li>
-                        <Link to="/share">Share Data</Link>
+                        <Link to="/share">Share Your Data</Link>
                     </li>
+
                     <li>
                         <Link to="/grant">Grant Access</Link>
                     </li>
+                    <li>
+                        <Link to="/request">Request Access</Link>
+                    </li>
+
                 </ul>
                 <Link to="#" className="close">Close</Link>
             </div>

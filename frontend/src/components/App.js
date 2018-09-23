@@ -10,6 +10,7 @@ import { Footer } from '../templates/Footer';
 // import components
 import { Share } from './Share';
 import { Grant } from './Grant';
+import { Request } from './Request';
 
 
 export class App extends React.Component {
@@ -28,6 +29,10 @@ export class App extends React.Component {
 
 					<Route path="/grant">
 						<Grant/>
+					</Route>
+
+					<Route path="/request">
+						<Request/>
 					</Route>
 
 					{/* default route: page not found */}
