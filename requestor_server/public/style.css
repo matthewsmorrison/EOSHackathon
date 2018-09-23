@@ -1,0 +1,85 @@
+body {
+  color: #605c6d;
+  font-family: 'Montserrat', sans-serif;
+}
+
+form {
+  font-family: Montserrat;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: 20px;
+  margin-left: -250px;
+  width: 500px;
+  height: 200px;
+  border: 4px dashed #605c6d;
+  cursor: pointer;
+}
+
+form p {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  line-height: 170px;
+  cursor: pointer;
+}
+
+form input {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  outline: none;
+  opacity: 0;
+  cursor: pointer;
+}
+
+form button {
+  margin: 0;
+  color: #fff;
+  background: #605c6d;
+  border: none;
+  width: 508px;
+  height: 35px;
+  margin-top: -20px;
+  margin-left: -4px;
+  border-radius: 4px;
+  border-bottom: 4px solid #605c6d;
+  transition: all .2s ease;
+  outline: none;
+  cursor: pointer;
+}
+
+form button:hover{
+  background: #605c6d;
+	color: #0C5645;
+}
+
+form button:active{
+  border:0;
+}
+
+img {
+  margin-top: 100px
+}
+
+.image {
+    margin: auto;
+    width: 45%;
+    padding: 10px;
+}
+
+.loader {
+    border: 8px solid #f3f3f3; /* Light grey */
+    border-top: 8px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
